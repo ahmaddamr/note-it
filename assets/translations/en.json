@@ -1,0 +1,14 @@
+{
+    "hello": "Hello",
+    "settings": "Settings",
+    "languages": "Languages",
+    "add": "Add New Task",
+    "edit": "Edit Task",
+    "date": "Select Date",
+    "time": "Select Time",
+    "singin": "Login",
+    "register": "Register",
+    "forget": "Forget Password?",
+    "submit": "Submit",
+    "todo": "Todo List"
+}
