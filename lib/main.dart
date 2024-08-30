@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app2/core/services/debug_service.dart';
+import 'package:todo_app2/core/theme/apptheme.dart';
 import 'package:todo_app2/firebase_options.dart';
 import 'package:todo_app2/manager/provider/main_provider.dart';
 import 'package:todo_app2/modules/auth/sign_in/page/sign_in_page.dart';
@@ -28,7 +30,7 @@ void main() async {
         supportedLocales: const [Locale('en'), Locale('ar')],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
-        child: const NoteIt(),
+        child: NoteIt(),
       ),
     ),
   );
@@ -36,13 +38,15 @@ void main() async {
 }
 
 class NoteIt extends StatelessWidget {
-  const NoteIt({super.key});
+  NoteIt({super.key});
+  // late MainProvider provider;
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<MainProvider>(context);
+    var myProvider = Provider.of<MainProvider>(context);
+    getTheme(myProvider);
     return MaterialApp(
-      theme: provider.themeData,
+      theme: myProvider.themeData,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -56,5 +60,12 @@ class NoteIt extends StatelessWidget {
       },
       initialRoute: const SplashScreen().routeName,
     );
+  }
+
+  void getTheme(MainProvider myProvider) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool theme = prefs.getBool('theme') ?? false;
+    myProvider
+        .changetheme(theme ? AppTheme().lightTheme : AppTheme().darkTheme);
   }
 }

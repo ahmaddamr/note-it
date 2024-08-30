@@ -179,11 +179,11 @@ class SettingsScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async{
                                   var provider = Provider.of<MainProvider>(
                                       context,
                                       listen: false);
-                                  provider.changetheme(AppTheme().darkTheme);
+                                await  provider.changetheme(AppTheme().darkTheme);
                                   log('change');
                                 },
                                 child: Text(
@@ -200,11 +200,12 @@ class SettingsScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async{
                                   var provider = Provider.of<MainProvider>(
                                       context,
                                       listen: false);
-                                  provider.changetheme(AppTheme().lightTheme);
+                                  await provider.changetheme(AppTheme().lightTheme);
+
                                 },
                                 child: Text(
                                   'Light',

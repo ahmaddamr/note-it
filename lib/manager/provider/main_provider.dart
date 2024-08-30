@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app2/core/theme/apptheme.dart';
 import 'package:todo_app2/models/task_model.dart';
 import 'package:todo_app2/models/user_model.dart';
@@ -9,7 +10,7 @@ class MainProvider extends ChangeNotifier {
   var date = DateTime.now();
   var datePicker = DateTime.now();
   var time = TimeOfDay.now();
-    ThemeData themeData = AppTheme().lightTheme;
+  ThemeData themeData = AppTheme().lightTheme;
   // bool Theme = false;
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
@@ -68,8 +69,9 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changetheme(ThemeData themeData)
-  {
+  Future<void> changetheme(ThemeData themeData) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('theme', themeData == AppTheme().lightTheme);
     this.themeData = themeData;
     notifyListeners();
   }
