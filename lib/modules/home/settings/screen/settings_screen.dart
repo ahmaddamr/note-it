@@ -179,11 +179,12 @@ class SettingsScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
-                                onTap: () async{
+                                onTap: () async {
                                   var provider = Provider.of<MainProvider>(
                                       context,
                                       listen: false);
-                                await  provider.changetheme(AppTheme().darkTheme);
+                                  await provider
+                                      .changetheme(AppTheme().darkTheme);
                                   log('change');
                                 },
                                 child: Text(
@@ -200,12 +201,12 @@ class SettingsScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
-                                onTap: () async{
+                                onTap: () async {
                                   var provider = Provider.of<MainProvider>(
                                       context,
                                       listen: false);
-                                  await provider.changetheme(AppTheme().lightTheme);
-
+                                  await provider
+                                      .changetheme(AppTheme().lightTheme);
                                 },
                                 child: Text(
                                   'Light',
@@ -217,7 +218,7 @@ class SettingsScreen extends StatelessWidget {
                                           fontWeight: FontWeight.normal),
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       );
@@ -228,6 +229,25 @@ class SettingsScreen extends StatelessWidget {
                     img:
                         'https://cdn-icons-png.flaticon.com/128/12180/12180682.png',
                     txt: 'theme'),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                child: ListTile(
+                  title: Text(
+                    'Dark',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(fontSize: 20, fontWeight: FontWeight.normal),
+                  ),
+                  trailing: Switch(
+                    value: provider.themeData == AppTheme().darkTheme,
+                    onChanged: (value) {
+                      provider.changetheme(
+                          value ? AppTheme().darkTheme : AppTheme().lightTheme);
+                    },
+                  ),
+                ),
               )
             ],
           ),
