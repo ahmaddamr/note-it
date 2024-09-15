@@ -4,6 +4,11 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
+dependencies {
+    // Add Firebase Analytics dependency
+    implementation 'com.google.firebase:firebase-analytics:21.0.0'
+}
+
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")

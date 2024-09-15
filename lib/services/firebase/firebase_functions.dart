@@ -34,7 +34,7 @@ class FirebaseFunctions {
     var ref = mainUserFunction();
     await ref.doc(user.id).set(user);
   }
-
+  //! you link the model with firestore to fetch data
   static Future<UserModel?> getUser() async{
     var user = FirebaseAuth.instance.currentUser!.uid;
     var ref = mainUserFunction();

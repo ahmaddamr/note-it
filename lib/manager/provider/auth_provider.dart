@@ -50,6 +50,5 @@ class AuthinticationProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
   
 }
